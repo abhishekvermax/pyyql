@@ -12,8 +12,8 @@ os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 # Import project modules
 from samplesparksession import SampleSparkSession
 from csvreader import CSVReader
-from src.main.pyyql import PYYql
-from src.main.yql import YQL
+from pyyql.pyyql import PYYql
+from pyyql.yql import YQL
 
 # Initialize Spark session
 spark = SampleSparkSession().new_spark_session()

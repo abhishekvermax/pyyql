@@ -6,7 +6,7 @@ from typing import Dict
 import pyspark.sql.functions as F
 from pyspark.sql.types import *
 
-from src.main.pyyql import PYYql
+from pyyql.pyyql import PYYql
 
 
 

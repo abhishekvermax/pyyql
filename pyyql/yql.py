@@ -5,7 +5,7 @@ import logging
 import time
 from datetime import datetime
 
-from src.main.pyyql import PYYql
+from pyyql.pyyql import PYYql
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

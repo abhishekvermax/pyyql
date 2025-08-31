@@ -12,7 +12,7 @@ os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
 # Import project modules
 from samplesparksession import SampleSparkSession
 
-from src.main.yql import YQL
+from pyyql.yql import YQL
 
 # Initialize Spark session
 spark = SampleSparkSession().new_spark_session()

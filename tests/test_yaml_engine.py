@@ -1,6 +1,6 @@
 from pyspark.sql import Row
 import unittest
-import main.yaml_engine as engine
+import pyyql.yaml_engine as engine
 from samplesparksession import SampleSparkSession
 import os
 import sys

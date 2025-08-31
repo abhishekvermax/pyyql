@@ -1,5 +1,5 @@
 from pyspark.sql import Row
-from test.samplesparksession import SampleSparkSession    
+from tests.samplesparksession import SampleSparkSession    
 
 spark = SampleSparkSession().new_spark_session()
 
