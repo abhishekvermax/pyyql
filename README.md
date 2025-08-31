@@ -287,6 +287,137 @@ else:
     print(f"Configuration error: {validation_result['error']}")
 ```
 
+
+### How output looks like
+
+```sh
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/08/31 21:08:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+DEBUG:pyyql.yql:YQL initialized with 3 DataFrames
+INFO:pyyql.yql:Starting YQL execution for: pyyql/usage/hr_analysis.yaml
+DEBUG:pyyql.yql:Validating YQL inputs...
+DEBUG:pyyql.yql:Input validation completed successfully
+DEBUG:pyyql.pyyql:Execution Plan:
+DEBUG:pyyql.pyyql:  1. FROM: Load dependencies
+DEBUG:pyyql.pyyql:  2. JOIN: Execute table joins
+DEBUG:pyyql.pyyql:  3. WHERE: Apply filter conditions
+DEBUG:pyyql.pyyql:  6. SELECT: Apply column projections and aliases
+DEBUG:pyyql.pyyql:  7. ORDER BY: Apply sorting
+DEBUG:pyyql.pyyql:JOIN: DataFrame has 3 rows and 8 columns                      
+DEBUG:pyyql.pyyql:JOIN: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:Available columns for filtering: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:Filter conditions: ['dept.status == 1', 'emp.emp_joining_year >= 2020', 'emp.emp_id IS NOT NULL']
+DEBUG:pyyql.pyyql:WHERE: DataFrame has 2 rows and 8 columns
+DEBUG:pyyql.pyyql:WHERE: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:GROUP BY: DataFrame has 2 rows and 8 columns
+DEBUG:pyyql.pyyql:GROUP BY: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:HAVING: DataFrame has 2 rows and 8 columns
+DEBUG:pyyql.pyyql:HAVING: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:Available columns for SELECT: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:SELECT mapping: {'emp.emp_id': 'employee_id', 'emp.emp_name': 'employee_name', 'emp.emp_joining_year': 'joining_year', 'mgr.manager_name': 'manager_name', 'dept.department_name': 'department', 'dept.status': 'dept_status'}
+DEBUG:pyyql.pyyql:SELECT: 'emp.emp_id' -> 'emp_id' AS 'employee_id'
+DEBUG:pyyql.pyyql:SELECT: 'emp.emp_name' -> 'emp_name' AS 'employee_name'
+DEBUG:pyyql.pyyql:SELECT: 'emp.emp_joining_year' -> 'emp_joining_year' AS 'joining_year'
+DEBUG:pyyql.pyyql:SELECT: 'mgr.manager_name' -> 'manager_name' AS 'manager_name'
+DEBUG:pyyql.pyyql:SELECT: 'dept.department_name' -> 'department_name' AS 'department'
+DEBUG:pyyql.pyyql:SELECT: 'dept.status' -> 'status' AS 'dept_status'
+DEBUG:pyyql.pyyql:SELECT: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:SELECT: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:Available columns for ORDER BY: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:Sort conditions: [('dept.department_name', 'asc'), ('emp.emp_name', 'asc')]
+WARNING:pyyql.pyyql:Column 'dept.department_name' not found in available columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:ORDER BY: 'dept.department_name' -> 'department' (asc)
+WARNING:pyyql.pyyql:Column 'emp.emp_name' not found in available columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:ORDER BY: 'emp.emp_name' -> 'employee_name' (asc)
+DEBUG:pyyql.pyyql:ORDER BY: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:ORDER BY: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:DISTINCT: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:DISTINCT: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:LIMIT: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:LIMIT: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:Final result: 2 rows, 6 columns
+INFO:pyyql.yql:YQL execution completed successfully in 7.82s
+DEBUG:pyyql.yql:=== YQL Execution Summary ===
+DEBUG:pyyql.yql:YAML Configuration: pyyql/usage/hr_analysis.yaml
+DEBUG:pyyql.yql:Input Tables: ['employee', 'manager', 'department']
+DEBUG:pyyql.yql:Output Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.yql:Execution Time: 7.822s
+DEBUG:pyyql.yql:Output Rows: 2
+DEBUG:pyyql.yql:==============================
++-----------+-------------+------------+------------+-----------+-----------+
+|employee_id|employee_name|joining_year|manager_name|department |dept_status|
++-----------+-------------+------------+------------+-----------+-----------+
+|1          |John Doe     |2020        |Sarah Wilson|Engineering|1          |
+|2          |Jane Smith   |2021        |Mike Davis  |Sales      |1          |
++-----------+-------------+------------+------------+-----------+-----------+
+
+INFO:pyyql.yql:Starting YQL execution for: pyyql/usage/hr_analysis.yaml
+DEBUG:pyyql.yql:Validating YQL inputs...
+DEBUG:pyyql.yql:Input validation completed successfully
+DEBUG:pyyql.pyyql:Execution Plan:
+DEBUG:pyyql.pyyql:  1. FROM: Load dependencies
+DEBUG:pyyql.pyyql:  2. JOIN: Execute table joins
+DEBUG:pyyql.pyyql:  3. WHERE: Apply filter conditions
+DEBUG:pyyql.pyyql:  6. SELECT: Apply column projections and aliases
+DEBUG:pyyql.pyyql:  7. ORDER BY: Apply sorting
+DEBUG:pyyql.pyyql:JOIN: DataFrame has 3 rows and 8 columns
+DEBUG:pyyql.pyyql:JOIN: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:Available columns for filtering: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:Filter conditions: ['dept.status == 1', 'emp.emp_joining_year >= 2020', 'emp.emp_id IS NOT NULL']
+DEBUG:pyyql.pyyql:WHERE: DataFrame has 2 rows and 8 columns
+DEBUG:pyyql.pyyql:WHERE: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:GROUP BY: DataFrame has 2 rows and 8 columns
+DEBUG:pyyql.pyyql:GROUP BY: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:HAVING: DataFrame has 2 rows and 8 columns
+DEBUG:pyyql.pyyql:HAVING: Columns: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:Available columns for SELECT: ['emp_id', 'emp_name', 'emp_joining_year', 'manager_id', 'manager_name', 'department_id', 'department_name', 'status']
+DEBUG:pyyql.pyyql:SELECT mapping: {'emp.emp_id': 'employee_id', 'emp.emp_name': 'employee_name', 'emp.emp_joining_year': 'joining_year', 'mgr.manager_name': 'manager_name', 'dept.department_name': 'department', 'dept.status': 'dept_status'}
+DEBUG:pyyql.pyyql:SELECT: 'emp.emp_id' -> 'emp_id' AS 'employee_id'
+DEBUG:pyyql.pyyql:SELECT: 'emp.emp_name' -> 'emp_name' AS 'employee_name'
+DEBUG:pyyql.pyyql:SELECT: 'emp.emp_joining_year' -> 'emp_joining_year' AS 'joining_year'
+DEBUG:pyyql.pyyql:SELECT: 'mgr.manager_name' -> 'manager_name' AS 'manager_name'
+DEBUG:pyyql.pyyql:SELECT: 'dept.department_name' -> 'department_name' AS 'department'
+DEBUG:pyyql.pyyql:SELECT: 'dept.status' -> 'status' AS 'dept_status'
+DEBUG:pyyql.pyyql:SELECT: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:SELECT: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:Available columns for ORDER BY: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:Sort conditions: [('dept.department_name', 'asc'), ('emp.emp_name', 'asc')]
+WARNING:pyyql.pyyql:Column 'dept.department_name' not found in available columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:ORDER BY: 'dept.department_name' -> 'department' (asc)
+WARNING:pyyql.pyyql:Column 'emp.emp_name' not found in available columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:ORDER BY: 'emp.emp_name' -> 'employee_name' (asc)
+DEBUG:pyyql.pyyql:ORDER BY: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:ORDER BY: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:DISTINCT: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:DISTINCT: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:LIMIT: DataFrame has 2 rows and 6 columns
+DEBUG:pyyql.pyyql:LIMIT: Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.pyyql:Final result: 2 rows, 6 columns
+INFO:pyyql.yql:YQL execution completed successfully in 4.30s
+DEBUG:pyyql.yql:=== YQL Execution Summary ===
+DEBUG:pyyql.yql:YAML Configuration: pyyql/usage/hr_analysis.yaml
+DEBUG:pyyql.yql:Input Tables: ['employee', 'manager', 'department']
+DEBUG:pyyql.yql:Output Columns: ['employee_id', 'employee_name', 'joining_year', 'manager_name', 'department', 'dept_status']
+DEBUG:pyyql.yql:Execution Time: 4.298s
+DEBUG:pyyql.yql:Output Rows: 2
+DEBUG:pyyql.yql:==============================
+Query ID: pyyql/usage/hr_analysis.yaml_1756667320
+Source tables: ['emp', 'mgr', 'dept']
+INFO:pyyql.yql:Performing dry run validation...
+DEBUG:pyyql.yql:Validating YQL inputs...
+DEBUG:pyyql.yql:Input validation completed successfully
+Configuration is valid
+Step 1: FROM
+Step 2: JOIN
+Step 3: WHERE
+Step 4: SELECT
+Step 5: ORDER BY
+INFO:py4j.clientserver:Closing down clientserver connection
+```
+
 ### Step 5: Understanding the Results
 
 ```python
